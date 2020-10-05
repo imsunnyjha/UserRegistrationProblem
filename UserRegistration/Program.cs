@@ -16,7 +16,16 @@ namespace UserRegistration
             if (!Regex.IsMatch(firstName, firstNamePattern))
                 Console.WriteLine("First Name should be in proper format!");
             else
-                Console.WriteLine(value: firstName + " validated!");
+                Console.WriteLine("First Name: " +firstName + " validated!");
+
+            //LastName Validation
+            string lastNamePattern = @"^[A-Z][a-z]{2,}$";
+            Console.WriteLine("Enter Last Name: ");
+            string lastName = Console.ReadLine();
+            if (!Regex.IsMatch(lastName, lastNamePattern))
+                Console.WriteLine("Last Name should be in proper format!");
+            else
+                Console.WriteLine("Last Name: " + lastName + " validated!");
         }
     }
 }
