@@ -9,122 +9,43 @@ namespace UserRegistration
         {
             Console.WriteLine("Welcome to User Registration Problem!");
 
-            //FirstName Validation
-            while (true)
-            {
-                string firstNamePattern = @"^[A-Z][a-z]{2,}$";
+                Validate validate = new Validate();
+            FirstName:
                 Console.WriteLine("Enter First Name: ");
                 string firstName = Console.ReadLine();
-                try
+                if (validate.ValidateFirstName(firstName) == false)
                 {
-                    if (Regex.IsMatch(firstName, firstNamePattern))
-                    {
-                        Console.WriteLine("First Name: " + firstName + " validated!");
-                        break;
-                    }
-                    else
-                    {
-                        throw new UserRegistrationCustomException("First letter must be capital and minimum of length 3");
-                    }
+                    goto FirstName;
                 }
-                catch (UserRegistrationCustomException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            //LastName Validation
-            while (true)
-            {
-                string lastNamePattern = @"^[A-Z][a-z]{2,}$";
+            LastName:
                 Console.WriteLine("Enter Last Name: ");
                 string lastName = Console.ReadLine();
-                try
+                if (validate.ValidateLastName(lastName) == false)
                 {
-                    if (Regex.IsMatch(lastName, lastNamePattern))
-                    {
-                        Console.WriteLine("Last Name: " + lastName + " validated!");
-                        break;
-                    }
-                    else
-                    {
-                        throw new UserRegistrationCustomException("First letter must be capital and minimum of length 3");
-                    }
+                    goto LastName;
                 }
-                catch (UserRegistrationCustomException e)
+            EMail:
+                Console.WriteLine("Enter EmailId: ");
+                string eMail = Console.ReadLine();
+                if (validate.ValidateEmail(eMail) == false)
                 {
-                    Console.WriteLine(e.Message);
+                    goto EMail;
                 }
-            }
-            //EmailId Validation
-            while (true)
-            {
-                string emailIdPattern = @"^[a-z][a-z0-9.+-]+(\.[a-z0-9]+)?@[a-z0-9]+\.[a-z]{2,}(\.[a-z]{2,})?$";
-                Console.WriteLine("Enter Email Id: ");
-                string emailId = Console.ReadLine();
-                try
+            PhoneNo:
+                Console.WriteLine("Enter Phone No: ");
+                string phoneNo = Console.ReadLine();
+                if (validate.ValidatePhoneNo(phoneNo) == false)
                 {
-                    if (Regex.IsMatch(emailId, emailIdPattern))
-                    {
-                        Console.WriteLine("Email Id: " + emailId + " validated!");
-                        break;
-                    }
-                    else
-                    {
-                        throw new UserRegistrationCustomException("Email Id should be in proper format!");
-                    }
+                    goto PhoneNo;
                 }
-                catch (UserRegistrationCustomException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            //Mobile Number Validation
-            while (true)
-            {
-                string mobileNumberPattern = @"^[+][1-9][0-9]+\s[1-9][0-9]{9}$";
-                Console.WriteLine("Enter Mobile Number: ");
-                string mobileNumber = Console.ReadLine();
-                try
-                {
-                    if (Regex.IsMatch(mobileNumber, mobileNumberPattern))
-                    {
-                        Console.WriteLine("Mobile Number: " + mobileNumber + " validated!");
-                        break;
-                    }
-                    else
-                    {
-                        throw new UserRegistrationCustomException("Mobile Number should be in proper format with country code!");
-                    }
-                }
-                catch (UserRegistrationCustomException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            //Password Generation
-            while (true)
-            {
-                string passwordPattern = @"(?=.*[A-Z])(?=.*\w)(?=.*\d)(?=[^\W]*[\W][^\W]*$).{8,}$";
-                Console.WriteLine("Enter Password of minimum 8 characters: ");
+            Password:
+                Console.WriteLine("Enter Password: ");
                 string password = Console.ReadLine();
-                try
+                if (validate.ValidatePassword(password) == false)
                 {
-                    if (Regex.IsMatch(password, passwordPattern))
-                    {
-                        Console.WriteLine("Password validated!");
-                        break;
-                    }
-                    else
-                    {
-                        throw new UserRegistrationCustomException("Password should be in proper format!");
-                    }
+                    goto Password;
+
                 }
-                catch (UserRegistrationCustomException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            Console.WriteLine("USER REGISTERED SUCCESFULLY!");
         }
     }
 }
